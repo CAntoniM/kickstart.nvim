@@ -40,7 +40,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
+vim.opt.termguicolors =true
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -55,6 +55,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
+vim.opt.colorcolumn = "79"
 vim.opt.rtp:prepend(lazypath)
 
 -- NOTE: Here is where you install your plugins.
@@ -71,6 +72,7 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+  'christoomey/vim-tmux-navigator',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -131,10 +133,10 @@ require('lazy').setup({
 
   {
     -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    'shaunsingh/nord.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'nord'
     end,
   },
 
@@ -145,7 +147,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'nord',
         component_separators = '|',
         section_separators = '',
       },
@@ -191,6 +193,17 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -426,10 +439,14 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
+  clangd = {},
+  gopls = {},
+  pyright = {},
+  rust_analyzer = {},
+  neocmake = {},
+  perlnavigator = {},
+  lemminx = {},
+  jdtls = {},
   -- tsserver = {},
 
   lua_ls = {
