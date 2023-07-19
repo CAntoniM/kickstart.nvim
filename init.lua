@@ -204,6 +204,14 @@ require('lazy').setup({
       require("nvim-tree").setup {}
     end,
   },
+
+  {'akinsho/toggleterm.nvim',version="*",opts={
+    open_mapping = [[<c-\>]],
+    hide_numbers = true,
+    direction = "float",
+  }
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -540,3 +548,9 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map('', '<leader>tt', ':NvimTreeToggle')
+
+require("toggleterm").setup{
+  open_mapping = [[<c-\>]]
+}
+
+
