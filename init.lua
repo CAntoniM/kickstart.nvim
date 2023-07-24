@@ -131,14 +131,7 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Theme inspired by Atom
-    'shaunsingh/nord.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'nord'
-    end,
-  },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
   {
     -- Set lualine as statusline
@@ -147,7 +140,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'nord',
+        theme = 'catppuccin',
         component_separators = '|',
         section_separators = '',
       },
@@ -550,7 +543,28 @@ end
 map('', '<leader>tt', ':NvimTreeToggle')
 
 require("toggleterm").setup{
-  open_mapping = [[<c-\>]]
+  open_mapping = [[<c-\>]],
+  direction = 'float',
 }
 
+require("catppuccin").setup({
+  flavour = "frappe",
+  background = {
+    light = "latte",
+    dark = "frappe",
+  },
+  transparent_background = false,
+  show_end_of_buffer = false,
+  term_colors = false,
+  intergrations = {
+    gitsigns = true,
+    nvimtree = true,
+    treesitter = true,
+    telescope = {
+      enabled = true,
+    },
+  }
+})
+
+vim.cmd.colorscheme "catppuccin"
 
